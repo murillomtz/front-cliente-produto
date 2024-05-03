@@ -14,15 +14,7 @@ export class CriarClienteComponent implements OnInit {
     id: '',
     nome: '',
     email: '',
-    senha: '',
-    sobrenome: '',
-    sexo: '',
-    dataNascimento: '',
-    nacionalidade: '',
-    endereco: '',
-    cidade: '',
-    estado: '',
-    telefone: '',
+    cpf: '',
   };
 
   estados: { id: number; sigla: string }[] = [];
@@ -55,37 +47,18 @@ export class CriarClienteComponent implements OnInit {
   }
 
   create(): void {
-    this.cliente.endereco= this.endereco.endereco +' Bairro ' + this.endereco.bairro +', '+ this.endereco.tipo 
-    + ' Nº'+ this.endereco.numero ;
 
     console.log(this.cliente)
     this.service.create(this.cliente).subscribe(
       (resposta) => {
         this.router.navigate(['clientes/tabela']);
+        alert("Criado com sucesso.")
       },
       (err) => {
-        // this.service.mensagem('Erro ao criar novo livro. Tente mais tarde!')
+        // this.service.mensagem('Erro ao criar novo cliente. Tente mais tarde!')
         console.log(err)
       }
     );
-  }
-
-  formatarTelefone() {
-    const cleanedValue = this.cliente.telefone.replace(/\D/g, '');
-
-    if (cleanedValue.length <= 10) {
-      const areaCode = cleanedValue.slice(0, 2);
-      const firstPart = cleanedValue.slice(2, 6);
-      const secondPart = cleanedValue.slice(6, 10);
-
-      this.cliente.telefone = `(${areaCode}) ${firstPart}-${secondPart}`;
-    } else {
-      const areaCode = cleanedValue.slice(0, 2);
-      const firstPart = cleanedValue.slice(2, 7);
-      const secondPart = cleanedValue.slice(7, 11);
-
-      this.cliente.telefone = `(${areaCode}) ${firstPart}-${secondPart}`;
-    }
   }
 
   onChangeEstado(estado: any) {

@@ -14,33 +14,33 @@ export class ClienteService {
   constructor(private http: HttpClient) {}
 
   findByid(id: any): Observable<Cliente> {
-    const url = `${this.baseUrl}/clientes/${id}`;
+    const url = `${this.baseUrl}/usuarios/${id}`;
     return this.http.get<any>(url);
 
   }
 
   fingAllGaleria(page: number): Observable<Cliente[]> {
-    const url = `${this.baseUrl}clientes?pagina=${page}&size=4`;
+    const url = `${this.baseUrl}usuarios?pagina=${page}&size=6`;
     return this.http.get<any>(url);
   }
 
   fingAll(page: number): Observable<Cliente[]> {
-    const url = `${this.baseUrl}clientes?pagina=${page}`;
+    const url = `${this.baseUrl}usuarios?pagina=${page}`;
     return this.http.get<any>(url);
   }
 
   create(cliente: Cliente): Observable<Cliente> {
-    const url = `${this.baseUrl}clientes`
+    const url = `${this.baseUrl}usuarios`
     return this.http.post<Cliente>(url, cliente)
   }
 
   update(cliente: Cliente): Observable<Cliente> {
-    const url = `${this.baseUrl}/clientes/${cliente.id}`
+    const url = `${this.baseUrl}/usuarios/${cliente.id}`
     return this.http.put<Cliente>(url, cliente)
   }
   
   delete(id: any): Observable<void> {
-    const url = `${this.baseUrl}/clientes/${id}`
+    const url = `${this.baseUrl}/usuarios/${id}`
     return this.http.delete<void>(url)
   }
 }

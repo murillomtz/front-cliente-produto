@@ -4,216 +4,63 @@
       <div class="col-md-3">
         <div class="my-3">
           <label class="form-group">Nome</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="cliente.nome"
-            name="nome"
-            [ngModelOptions]="{ standalone: true }"
-          />
+          <input type="text" class="form-control" [(ngModel)]="cliente.nome" name="nome"
+            [ngModelOptions]="{ standalone: true }" />
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="my-3">
-          <label class="form-group">Sobrenome</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="cliente.sobrenome"
-            name="sobrenome"
-            [ngModelOptions]="{ standalone: true }"
-          />
+          <label class="form-group">CPF</label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.cpf" name="cpf"
+            [ngModelOptions]="{ standalone: true }" />
         </div>
       </div>
       <div class="col-md-4">
         <div class="my-3">
           <label class="form-group">E-mail</label>
-          <input
-            type="email"
-            class="form-control"
-            [(ngModel)]="cliente.email"
-            name="email"
-            [ngModelOptions]="{ standalone: true }"
-          />
+          <input type="email" class="form-control" [(ngModel)]="cliente.email" name="email"
+            [ngModelOptions]="{ standalone: true }" />
         </div>
       </div>
     </div>
+
+
     <div class="row">
       <div class="col-md-3">
         <div class="my-3">
-          <label class="form-group">Senha</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="cliente.senha"
-            name="senha"
-            [ngModelOptions]="{ standalone: true }"
-          />
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="my-3">
-          <label class="form-group">Telefone</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="cliente.telefone"
-            name="telefone"
-            [ngModelOptions]="{ standalone: true }"
-            (ngModelChange)="formatarTelefone()"
-          />
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div class="my-3">
-          <label class="form-group">Sexo</label>
-          <select
-            class="form-control"
-            [(ngModel)]="cliente.sexo"
-            name="sexo"
-            [ngModelOptions]="{ standalone: true }"
-            placeholder="Selecione"
-          >
-            <option value="Masculino">Masculino</option>
-            <option value="Feminino">Feminino</option>
-            <option value="Não Binário">Não Binário</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="col-md-2">
-        <div class="my-3">
-          <label class="form-group">Data de Nascimento</label>
-          <input
-            type="date"
-            class="form-control"
-            [(ngModel)]="cliente.dataNascimento"
-            name="dataNascimento"
-            [ngModelOptions]="{ standalone: true }"
-          />
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-5">
-        <div class="my-3">
-          <label class="form-group">Endereço</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="endereco.endereco"
-            name="endereco"
-            [ngModelOptions]="{ standalone: true }"
-            placeholder="Rua ..."
-          />
-        </div>
-      </div>
-
-      <div class="col-md-2">
-        <div class="my-3">
-          <label class="form-group">Bairro </label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="endereco.bairro"
-            name="bairro "
-            [ngModelOptions]="{ standalone: true }"
-            placeholder="Bairro ..."
-          />
-        </div>
-      </div>
-      <div class="col-md-1">
-        <div class="my-3">
-          <label class="form-group">Tipo:</label>
-          <select
-            class="form-control"
-            [(ngModel)]="endereco.tipo"
-            name="tipo"
-            [ngModelOptions]="{ standalone: true }"
-            placeholder="Selecione"
-          >
-            <option value="apartemento">Apt</option>
-            <option value="casa">Casa</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="col-md-2">
-        <div class="my-3">
-          <label class="form-group">Nº</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="endereco.numero"
-            name="numero"
-            [ngModelOptions]="{ standalone: true }"
-            placeholder="Ex: 253D"
-          />
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-3">
-        <div class="my-3">
-          <label class="form-group" for="estado">Estado:</label>
-          <select
-            class="form-control"
-            [(ngModel)]="cliente.estado"
-            name="estado"
-            [ngModelOptions]="{ standalone: true }"
-            (change)="onChangeEstado($event.target)"
-          >
+          <label class="form-group" for="estado">Estado: Apenas p/ Demo</label>
+          <select class="form-control" name="estado" (change)="onChangeEstado($event.target)">
             <option value="">Selecione um estado</option>
-            <option 
-              *ngFor="let item of estados"
-              [ngValue]="item.sigla" 
-              #estadosOpt
-            > 
+            <option *ngFor="let item of estados" [ngValue]="item.sigla" #estadosOpt>
               {{ item.sigla }}
             </option>
-          </select> 
+          </select>
         </div>
       </div>
-
+<!-- 
       <div class="col-md-4">
         <div class="my-3">
-            <label class="form-group" for="cidade">Cidade:</label>
-            <select
-            class="form-control"
-            [(ngModel)]="cliente.cidade"
-            name="cidade"
-            [ngModelOptions]="{ standalone: true }"
-            placeholder="Selecione uma cidade"
-          >
+          <label class="form-group" for="cidade">Cidade: Apenas p/ Demo</label>
+          <select class="form-control" name="cidade" placeholder="Selecione uma cidade">
             <option value="">Selecione uma cidade</option>
             <option *ngFor="let item of cidades" [value]="item.nome">{{ item.nome }}</option>
           </select>
         </div>
-      </div>
-      
+      </div> -->
+
       <div class="col-md-3">
         <div class="my-3">
-          <label class="form-group">Nacionalidade:</label>
-          <select
-            class="form-control"
-            [(ngModel)]="cliente.nacionalidade"
-            name="tipo"
-            [ngModelOptions]="{ standalone: true }"
-          >
-          <option value="">Selecione um Pais</option>
-          <option *ngFor="let item of paises" [value]="item">{{ item}}</option>
+          <label class="form-group">Nacionalidade: Apenas p/ Demo</label>
+          <select class="form-control"  name="tipo">
+            <option value="">Selecione um Pais</option>
+            <option *ngFor="let item of paises" [value]="item">{{ item}}</option>
           </select>
         </div>
       </div>
     </div>
 
-    <button
-      (click)="create()"
-      type="button"
-      class="btn btn-success mat-elevation-z8"
-      color="success"
-    >
+    <button (click)="create()" type="button" class="btn btn-success mat-elevation-z8" color="success">
       CRIAR
     </button>
   </form>

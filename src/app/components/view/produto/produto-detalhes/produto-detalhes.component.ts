@@ -52,7 +52,7 @@ export class ProdutoDetalhesComponent implements OnInit {
       console.log(data.data)
     },err => {
       console.log(err)
-      // this.service.mensagem('Erro ao criar novo livro. Tente mais tarde!')
+      // this.service.mensagem('Erro ao criar novo cliente. Tente mais tarde!')
     });
   }
 }

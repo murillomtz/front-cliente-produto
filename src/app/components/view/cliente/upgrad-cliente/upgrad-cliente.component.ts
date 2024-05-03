@@ -15,15 +15,7 @@ export class UpgradClienteComponent implements OnInit {
     id: '',
     nome: '',
     email: '',
-    senha: '',
-    sobrenome: '',
-    sexo: '',
-    dataNascimento: '',
-    nacionalidade: '',
-    endereco: '',
-    cidade: '',
-    estado: '',
-    telefone: '',
+    cpf: '',
   };
 
   estados: { id: number; sigla: string }[] = [];
@@ -48,21 +40,7 @@ export class UpgradClienteComponent implements OnInit {
       this.cliente.id = data.data.id;
       this.cliente.nome = data.data.nome;
       this.cliente.email = data.data.email;
-      this.cliente.senha = data.data.senha;
-      this.cliente.sobrenome = data.data.sobrenome;
-      this.cliente.sexo = data.data.sexo;
-
-      this.cliente.dataNascimento =
-        this.datePipe.transform(data.data.dataNascimento, 'yyyy-MM-dd') ?? '';
-
-      this.cliente.nacionalidade = data.data.nacionalidade;
-      this.cliente.endereco = data.data.endereco;
-      this.cliente.cidade = data.data.cidade;
-      this.cliente.estado = data.data.estado;
-      this.cliente.telefone = data.data.telefone;
-
-      console.log('#################### 0,' + data.data);
-      console.log('#################### 1,' + JSON.stringify(this.cliente));
+      this.cliente.cpf = data.data.cpf;
     });
 
     this.localidadesService.getEstados().subscribe((estados: any[]) => {
@@ -74,28 +52,20 @@ export class UpgradClienteComponent implements OnInit {
 
     this.localidadesService.getPaises().subscribe((paises: any) => {
       this.paises = paises.map((pais: any) => {
-        return pais.translations.por.common; // Salva apenas o elemento paises.translations.por
+        return pais.translations.por.common; 
       });
     });
 
-    var estadoMap = this.estados.find(estado => estado.sigla == this.cliente.estado);
-    this.localidadesService
-    .getCidadesPorEstado(estadoMap?.id)
-    .subscribe((cidades) => {
-      this.cidades = cidades;
-      console.log(this.cliente.estado,'##########cidades########## 1,' + this.cidades);
-    });
+    // var estadoMap = this.estados.find(estado => estado.sigla == this.cliente.estado);
+    // this.localidadesService
+    // .getCidadesPorEstado(estadoMap?.id)
+    // .subscribe((cidades) => {
+    //   this.cidades = cidades;
+    //   console.log(this.cliente.estado,'##########cidades########## 1,' + this.cidades);
+    // });
   }
 
   create(): void {
-    this.cliente.endereco =
-      this.endereco.endereco +
-      ' Bairro ' +
-      this.endereco.bairro +
-      ', ' +
-      this.endereco.tipo +
-      ' Nº' +
-      this.endereco.numero;
 
     console.log(this.cliente);
     this.service.create(this.cliente).subscribe(
@@ -103,28 +73,10 @@ export class UpgradClienteComponent implements OnInit {
         this.router.navigate(['clientes/tabela']);
       },
       (err) => {
-        // this.service.mensagem('Erro ao criar novo livro. Tente mais tarde!')
+        // this.service.mensagem('Erro ao criar novo cliente. Tente mais tarde!')
         console.log(err);
       }
     );
-  }
-
-  formatarTelefone() {
-    const cleanedValue = this.cliente.telefone.replace(/\D/g, '');
-
-    if (cleanedValue.length <= 10) {
-      const areaCode = cleanedValue.slice(0, 2);
-      const firstPart = cleanedValue.slice(2, 6);
-      const secondPart = cleanedValue.slice(6, 10);
-
-      this.cliente.telefone = `(${areaCode}) ${firstPart}-${secondPart}`;
-    } else {
-      const areaCode = cleanedValue.slice(0, 2);
-      const firstPart = cleanedValue.slice(2, 7);
-      const secondPart = cleanedValue.slice(7, 11);
-
-      this.cliente.telefone = `(${areaCode}) ${firstPart}-${secondPart}`;
-    }
   }
 
   onChangeEstado(estado: any) {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Produto } from 'src/app/components/model/produto.model';
 import { ProdutoService } from 'src/app/components/service/produto.service';
 
@@ -10,7 +10,7 @@ import { ProdutoService } from 'src/app/components/service/produto.service';
 })
 export class UpdateProdutoComponent implements OnInit {
 
-  id_produto: any ='';
+  id_produto: any = '';
   produto: Produto = {
     descricao: '',
     id: '',
@@ -19,33 +19,34 @@ export class UpdateProdutoComponent implements OnInit {
     valorVenda: '',
   };
 
-  constructor(private service: ProdutoService,private route: ActivatedRoute) {  }
+  constructor(private service: ProdutoService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     sessionStorage.setItem('componenteAtual', "Atualizar Produto");
     this.id_produto = this.route.snapshot.paramMap.get('id');
     this.service.findByid(this.id_produto).subscribe((data: any) => {
-      
-      this.produto.id =  data.data.id;
-      this.produto.nome =  data.data.nome;
-      this.produto.quantidade =  data.data.quantidade;
-      this.produto.valorVenda =  data.data.valorVenda;
-      this.produto.descricao =  data.data.descricao;
-      
-        console.log('#################### 0,' + data.data.nome);
-        console.log('#################### 1,' + JSON.stringify(this.produto));
+
+      this.produto.id = data.data.id;
+      this.produto.nome = data.data.nome;
+      this.produto.quantidade = data.data.quantidade;
+      this.produto.valorVenda = data.data.valorVenda;
+      this.produto.descricao = data.data.descricao;
+
+      console.log('#################### 0,' + data.data.nome);
+      console.log('#################### 1,' + JSON.stringify(this.produto));
     });
   }
 
   atualizar(): void {
     this.service.update(this.produto).subscribe(resposta => {
-      
-      
+      this.router.navigate(['produtos']);
+      alert("Produto alterado.");
+
     }, err => {
-      
-      // this.service.mensagem('Erro ao criar novo livro. Tente mais tarde!')
+
+      alert('Erro ao criar novo livro. Tente mais tarde!')
     });
   }
 
-  
+
 }

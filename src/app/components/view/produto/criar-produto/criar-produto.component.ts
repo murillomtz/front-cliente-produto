@@ -31,7 +31,7 @@ export class CriarProdutoComponent implements OnInit {
       
     }, err => {
       
-      // this.service.mensagem('Erro ao criar novo livro. Tente mais tarde!')
+      // this.service.mensagem('Erro ao criar novo cliente. Tente mais tarde!')
     });
   }
   
